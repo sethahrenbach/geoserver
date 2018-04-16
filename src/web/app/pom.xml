@@ -1472,6 +1472,16 @@
       </dependencies>
     </profile>
     <profile>
+      <id>oauth2</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.geoserver.community</groupId>
+          <artifactId>gs-sec-oauth2</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
       <id>wmts-multi-dimensional</id>
       <dependencies>
         <dependency>

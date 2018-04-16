@@ -12,24 +12,21 @@ OAuth2 Protocol and GeoServer OAuth2 core module
 
 This module allows GeoServer to authenticate against the `OAuth2 Protocol <https://tools.ietf.org/html/rfc6749>`_.
 
-In order to let the module work, it's mandatory to setup and configure both ``oauth2`` and ``oauth2-xxxx-extension``.
-
-The first one contains the necessary dependencies of the OAuth2 core module. This module contains the implementation of the 
-GeoServer security filter, the base classes for the OAuth2 Token services and the GeoServer GUI panel.
+The module includes an OAuth2 core module (``oauth2``) which defines a generic extension suitable for
+fully-compliant OAuth2 providers. Additional optional extension modules are also provided for specific OAuth2
+implementations.
 
 Since in almost all cases the only thing different between OAuth2 Providers are the endpoint URIs and the client connection
 information (not only the keys - public and secret - but also the user profile representations), in order to allow GeoServer
-connecting to a specific OAuth2 provider it is sufficient to install the OAuth2 Core module plugin (and correctly configure
-the parameters through the GeoServer GUI - see next section for the details) and the concrete implementation of the OAuth2
-REST token template and resource details.
+to connect to a specific OAuth2 provider it is sufficient to install the OAuth2 Core module plugin (and correctly configure
+the parameters through the GeoServer GUI - see next section for the details), which includes generic implementations
+of the REST token template and resource details. Optionally a provided or custom extension can be installed for OAuth2
+implementations for a specific provider (e.g. Google).
 
-Currently this module is shipped with a sample extension for Google OAuth2 Provider. This is a particular case since the 
-Google JWT response is not standard and therefore we had to define and inject also a ``GoogleUserAuthenticationConverter`` taking
-the Google REST response against a valid ``access_token`` and converting it to a OAuth2 standard one.
-
-Other than this the most interesting part is the implementation of the base class ``GeoServerOAuth2SecurityConfiguration``.
-
-The latter contains the Google implementation of the ``OAuth2RestTemplate``.
+Currently this module is shipped with custom extensions for Google, GitHub and GeoNode OAuth2 providers. The
+Google extension is a particular case since the Google JWT response is not standard and therefore a custom
+converter (e.g. ``GoogleUserAuthenticationConverter``) is required to take the Google REST response against a
+valid ``access_token`` and converting it to a OAuth2 standard one.
 
 In the next section we will see how to install and configure the OAuth2 security filter on GeoServer authenticating against 
 Google OAuth2 Provider.
